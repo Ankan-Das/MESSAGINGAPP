@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_bcrypt import Bcrypt
@@ -43,6 +43,8 @@ def test():
 
 @app.route('/')
 def login_page():
+    if current_user.is_authenticated:
+        return redirect(url_for('indexFunc'))
     return render_template('login.html')
 
 @app.route('/index')
@@ -103,7 +105,6 @@ def create_account():
             return jsonify({'success': False, 'error': 'Username already taken'})
         # Add the user to the global variable (replace this with database storage)
         hashedPassword = bcrypt.generate_password_hash(password=password)
-        # hashedPassword = password
         newUser = User(name=name, username=username, password=hashedPassword)
         db.session.add(newUser)
         db.session.commit()
