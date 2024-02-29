@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="logout-message">Logged Out</div>
+
+    <script>
+        // Define a function to wait for a specified time
+        const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+        // Use async/await to wait for 2 seconds and then redirect
+        (async () => {
+            await wait(2000);
+            window.location.href = "{{ url_for('login_page') }}";
+        })();
+    </script>
+    
+</body>
+</html>

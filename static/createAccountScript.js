@@ -29,7 +29,15 @@ function submitForm() {
     .then(data => {
         if (data.success) {
             // If account creation is successful, redirect to login page
-            window.location.href = '/';
+            document.getElementById('createAccountForm').reset();
+            document.getElementById('errorMessage').style.color = 'green';
+            document.getElementById('createAccountForm').querySelector('.error-message').innerText = 'Account Created!';
+            // but first wait for 2 seconds
+            const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+            (async () => {
+                await wait(2000);
+                window.location.href = "/";
+            })();
         } else {
             // Display error message on the create account page
             document.getElementById('createAccountForm').reset();  // Reset form

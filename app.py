@@ -47,14 +47,6 @@ def login_page():
         return redirect(url_for('indexFunc'))
     return render_template('login.html')
 
-@app.route('/index')
-@login_required
-def indexFunc():
-    name = current_user.name
-    if name:
-        return render_template('index.html', name=name)
-    else:
-        return 'Unauthorized', 401
 
 @app.route('/createAccountPage')
 def create_account_page():
@@ -84,7 +76,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return "Logged out"
+    return render_template('logout.html')
 
 @app.route('/createAccount', methods=['POST'])
 def create_account():
@@ -114,6 +106,14 @@ def create_account():
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
     
+@app.route('/index')
+@login_required
+def indexFunc():
+    name = current_user.name
+    if name:
+        return render_template('index.html', name=name)
+    else:
+        return 'Unauthorized', 401
 
 @socketio.on('send_message')
 def handle_message(data):
