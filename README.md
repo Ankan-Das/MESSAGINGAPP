@@ -1,2 +1,0 @@
-# MESSAGINGAPP
-Simple Messaging project
