@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='loginStyles.css') }}">
+    <title>Login</title>
+</head>
+<body>
+    <div class="container">
+        <form id="loginForm">
+            <h2>Login</h2>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <div id="errorMessage" class="error-message"></div>
+            <button type="button" onclick="submitForm()">Submit</button>
+        </form>
+        <p>Don't have an account? <a href="/createAccountPage">Create one</a>.</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='loginScript.js') }}"></script>
+</body>
+</html>
